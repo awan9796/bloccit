@@ -23,7 +23,11 @@ RSpec.describe PostsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
+<<<<<<< HEAD
     it "renders the new #view" do
+=======
+    it "renders the #new view" do
+>>>>>>> CP32
       get :new
       expect(response).to render_template :new
     end
@@ -31,17 +35,27 @@ RSpec.describe PostsController, type: :controller do
     it "instantiates @post" do
       get :new
       expect(assigns(:post)).not_to be_nil
+<<<<<<< HEAD
     end
   end
+=======
+      end
+    end
+>>>>>>> CP32
 
   describe "POST create" do
     it "increases the number of Post by 1" do
       expect{post :create, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}}.to change(Post,:count).by(1)
+<<<<<<< HEAD
     end
+=======
+      end
+>>>>>>> CP32
 
     it "assigns the new post to @post" do
       post :create, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}
       expect(assigns(:post)).to eq Post.last
+<<<<<<< HEAD
     end
 
     it "redirects to the new post" do
@@ -51,3 +65,26 @@ RSpec.describe PostsController, type: :controller do
     end
 
   end
+=======
+      end
+
+      it "redirects to the new post" do
+        post :create, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}
+        expect(response).to redirect_to Post.last
+        end
+      end
+
+    describe "GET show" do
+      it "returns http success" do
+        get :show, {id: my_post.id}
+        expect(response).to have_http_status(:success)
+      end
+
+      it "assigns my_post to @post" do
+        get: show, {id: my_post.id}
+        expect(assigns(:post)).to eq(my_post)
+      end
+    end
+  end
+end
+>>>>>>> CP32
