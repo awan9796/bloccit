@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
-<<<<<<< HEAD
     @posts.each_with_index do |post, index|
       if index == 5
         post.title = "SPAM"
@@ -14,7 +13,7 @@ class PostsController < ApplicationController
 
 end
 end
-=======
+
   end
 
   def new
@@ -48,4 +47,3 @@ end
 
   #def edit
   #end
->>>>>>> CP32
