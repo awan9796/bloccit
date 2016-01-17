@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 
  # #1
  group :production do
-   gem 'pg'
+   #gem 'pg'
    #gem 'rails_12factor'
  end
 
@@ -13,13 +13,11 @@ source 'https://rubygems.org'
  group :development do
    gem 'sqlite3'
    gem 'pry-rails'
-   gem 'pg'
  end
 
  group :development, :test do
    gem 'rspec-rails', '~>3.0'
    gem 'shoulda'
-   gem 'pg'
  end
 
  # Use SCSS for stylesheets
