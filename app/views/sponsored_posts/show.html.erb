@@ -1,0 +1,22 @@
+<h1>Sponsored Posts</h1>
+
+ <%= link_to "Edit Title", edit_topic_path, class: 'btn btn-success' %>
+
+ <div class="row">
+   <div class="col-md-8">
+     <p class="lead"><%= @sponsored_post.body %></p>
+ <!-- #10 -->
+     <% @sponsored_post.each do |sponsored_posts| %>
+       <div class="media">
+         <div class="media-body">
+           <h4 class="media-heading">
+             <%= link_to sponsored_post.title, sponsored_post %>
+           </h4>
+         </div>
+       </div>
+     <% end %>
+   </div>
+   <div class="col-md-4">
+     <%= link_to "New Sponsored Post", new_sponsored_post_path(@sponsored_post), class: 'btn btn-success' %>
+   </div>
+ </div>
