@@ -5,13 +5,13 @@ source 'https://rubygems.org'
 
  # #1
  group :production do
-   gem 'pg'
-   gem 'rails_12factor'
+   #gem 'pg'
+   #gem 'rails_12factor'
  end
 
  # #2
  group :development do
-
+    gem 'sqlite3'
    gem 'pry-rails'
  end
 
