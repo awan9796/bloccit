@@ -5,4 +5,5 @@ class Topic < ActiveRecord::Base
   validates :name, presence: true
   validates :description, length: { minimum: 25}
   validates :description, presence: true
+
 end
