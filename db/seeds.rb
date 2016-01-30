@@ -19,8 +19,9 @@ posts = Post.all
   )
 end
 
-Post.find_or_create_by(title: "My thoughts on Ruby", body: "Love it and Hate it at the same time...")
-Comment.find_or_create_by(body: "One unique comment")
+puts "#{Post.count}"
+Post.find_or_create_by(title: "Ozzie", body: "Ozzie is a big brown Rhodesian Ridgeback")
+puts "#{Post.count}"
 
 
 puts "Seed finished"
