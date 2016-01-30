@@ -14,15 +14,20 @@ class TopicsController < ApplicationController
 
   def create
 
-     @topic.public = params[:topic][:public]
+    @topic = Topic.new
+    @topic.name = params[:topic][:name]
+    @topic.description = params[:topic][:description]
+    @topic.public = params[:topic][:public]
 
-     if @topic.save
-       redirect_to @topic, notice: "Topic was saved successfully."
-     else
-       flash.now[:alert] = "Error creating topic. Please try again."
-       render :new
-     end
-   end
+    if @topic.save
+      redirect_to @topic, notice: "Topic was saved successfully."
+    else
+      flash.now[:alert] = "Error creating topic. Please try again."
+      render :new
+    end
+  end
+
+
 
    def edit
      @topic = Topic.find(params[:id])
