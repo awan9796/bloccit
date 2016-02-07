@@ -5,7 +5,7 @@ RSpec.describe SponsoredPostsController, type: :controller do
 
 
   let(:my_topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
-  let(:new_sponsored_post) { my_topic.sponsored_posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
+  let(:new_sponsored_post) { my_topic.sponsored_post.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
 
 
 

@@ -3,11 +3,14 @@ include RandomData
 
 include SessionsHelper
 
+
+
 RSpec.describe PostsController, type: :controller do
 
-  let(:my_user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
-  let(:my_topic) { Topic.create!(name:  RandomData.random_sentence, description: RandomData.random_paragraph) }
-  let(:my_post) { my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: my_user) }
+     let(:my_user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
+     let(:my_topic) { Topic.create!(name:  RandomData.random_sentence, description: RandomData.random_paragraph) }
+     let(:my_post) { my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: my_user) }
+
 
 
   context "guest user" do
@@ -71,27 +74,27 @@ RSpec.describe PostsController, type: :controller do
    end
 
    context "signed-in user" do
-     before do
-       create_session(my_user)
-     end
+      before do
+        create_session(my_user)
+      end
 
 
-  describe "GET new" do
-     it "returns http success" do
-       get :new, topic_id: my_topic.id
-       expect(response).to have_http_status(:success)
-     end
+      describe "GET show" do
+            it "returns http success" do
+              get :show, topic_id: my_topic.id, id: my_post.id
+              expect(response).to have_http_status(:success)
+            end
 
-     it "renders the #new view" do
-       get :new, topic_id: my_topic.id
-       expect(response).to render_template :new
-     end
+            it "renders the #show view" do
+              get :show, topic_id: my_topic.id, id: my_post.id
+              expect(response).to render_template :show
+            end
 
-     it "initializes @post" do
-       get :new, topic_id: my_topic.id
-       expect(assigns(:post)).not_to be_nil
-     end
-   end
+            it "assigns my_post to @post" do
+              get :show, topic_id: my_topic.id, id: my_post.id
+              expect(assigns(:post)).to eq(my_post)
+            end
+          end
     #it "instantiates @post" do
       #get :new
       #expect(assigns(:post)).not_to be_nil
@@ -121,6 +124,7 @@ RSpec.describe PostsController, type: :controller do
     it "increases the number of Post by 1" do
         post :create, topic_id: my_topic.id, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}
         expect{post :create, topic_id: my_topic.id, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}}.to change(Post,:count).by(1)
+    end
 
     it "assigns the new post to @post" do
         post :create, topic_id: my_topic.id, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}
@@ -133,12 +137,14 @@ RSpec.describe PostsController, type: :controller do
     end
 
       it "renders the #show view" do
-        get :show, {id: my_post.id}
+        get :show, {id: my_post.id, topic_id: my_topic.id}
         expect(response). to render_template :show
       end
 
       it "assigns my_post to @post" do
-        get :show, {id: my_post.id}
+Rails.logger.info "**********"
+        get :show, {id: my_post.id, topic_id: my_topic.id}
+Rails.logger.info "**********"
         expect(assigns(:post)).to eq(my_post)
       end
     end
@@ -199,5 +205,4 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
-end
 end
