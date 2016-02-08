@@ -57,6 +57,10 @@ RSpec.describe User, type: :model do
        it "returns false for #admin?" do
          expect(user.admin?).to be_falsey
        end
+
+       it "returns false for a #moderator?" do
+         expect(user.moderator?).to be_falsey
+       end
      end
 
     context "admin user" do
@@ -68,11 +72,35 @@ RSpec.describe User, type: :model do
         expect(user.member?).to be_falsey
       end
 
+      it "returns false for a #moderator?" do
+        expect(user.moderator?).to be_falsey
+      end
+
       it "returns true for #admin?" do
         expect(user.admin?).to be_truthy
       end
     end
 
+    context "moderator user" do
+
+      before do
+        user.moderator!
+      end
+
+      it "returns false for a #member?" do
+        expect(user.member?).to be_falsey
+      end
+
+      it "returns false for #admin?" do
+        expect(user.admin?).to be_falsey
+      end
+
+      it "returns true for #moderator?" do
+        expect(user.moderator?).to be_truthy
+      end
+    end
+
+    end
 
   describe "invalid user" do
      let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }
@@ -93,4 +121,3 @@ RSpec.describe User, type: :model do
 
    end
  end
-end
