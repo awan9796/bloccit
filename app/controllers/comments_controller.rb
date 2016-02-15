@@ -13,13 +13,11 @@ class CommentsController < ApplicationController
        flash[:notice] = "Comment saved successfully."
        redirect_to [@post.topic, @post]
      else
-       flash[:alert] = "Comment failed to save."
        redirect_to [@post.topic, @post]
-     end
-   end
+        end
+      end
 
-
-   def destroy
+      def destroy
      @post = Post.find(params[:post_id])
      comment = @post.comments.find(params[:id])
 
@@ -31,7 +29,6 @@ class CommentsController < ApplicationController
        redirect_to [@post.topic, @post]
      end
    end
-
 
    private
 
@@ -46,4 +43,5 @@ class CommentsController < ApplicationController
        redirect_to [comment.post.topic, comment.post]
      end
    end
+
  end
