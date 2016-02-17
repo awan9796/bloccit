@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charget=UTF-8" http-equiv="Content-Type" />
+</head>
+
+<body>
+  <h1>You are now following "<%= @post.title %>, you will be emailed any changes or updates to your followed posts.  You can unfavourite the post if you want the emails to stop by clicking this link: <%= link_to "post", topic_post_url(@post.topic, @post) %>.</h1>
+
+  <p>
+    <% link_to "View your favourited post on Bloccit", topic_post_url(@post.topic, @post) %>
+  </p>
+</body>
+</html>
