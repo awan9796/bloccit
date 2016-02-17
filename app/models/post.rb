@@ -5,6 +5,9 @@ class Post < ActiveRecord::Base
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
 
+  has_many :commentings, as: :commentable
+  has_many :comments, through: :commentings
+
   default_scope { order('created_at DESC') }
 
    validates :title, length: { minimum: 5 }, presence: true

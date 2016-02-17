@@ -11,5 +11,13 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe CommentsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "comments_to_buttons" do
+     it "turns comments into HTML buttons" do
+       C1 = Comment.create!(body: "C1")
+       C2 = Comment.create!(body: "C2")
+       expected_html = '<a class="btn-xs btn-primary" href="/comments/1">L1</a> <a class="btn-xs btn-primary" href="/comments/2">L2</a>'
+
+       expect(comments_to_buttons([C1, C2])).to eq expected_html
+     end
+   end
 end

@@ -3,6 +3,10 @@ class CommentsController < ApplicationController
   before_action :require_sign_in
   before_action :authorize_user, only: [:destroy]
 
+  def show
+    @comment = Comment.find(params[:id])
+  end
+
    def create
 
      @post = Post.find(params[:post_id])
@@ -18,8 +22,9 @@ class CommentsController < ApplicationController
       end
 
       def destroy
-     @post = Post.find(params[:post_id])
-     comment = @post.comments.find(params[:id])
+
+        @post = Post.find(params[:post_id])
+        comment = @post.comments.find(params[:id])
 
      if comment.destroy
        flash[:notice] = "Comment was deleted."

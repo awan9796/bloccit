@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
 
+  resources :comments, only: [:show]
+
   resources :labels, only: [:show]
 
   resources :topics do
     resources :posts, except: [:index]
+      resources :comments, only: [:create, :destroy, :show]
 
   end
 
   resources :posts, only: [] do
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy, :show]
   end
 
   resources :users, only: [:new, :create]

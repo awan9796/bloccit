@@ -20,10 +20,10 @@ class TopicsController < ApplicationController
      @topic = Topic.new(topic_params)
 
      if @topic.save
-       @topic.labels = Label.update_labels(params[:topic][:labels])
-       redirect_to @topic, notice: "Topic was saved successfully."
+       @topic.comments = Comment.update_comments(params[:topic][:comments])
+       redirect_to @topic, notice: "Comment was saved successfully."
      else
-       flash.now[:alert] = "Error creating topic. Please try again."
+       flash.now[:alert] = "Error creating comment. Please try again."
        render :new
      end
    end
@@ -38,12 +38,12 @@ class TopicsController < ApplicationController
      @topic.assign_attributes(topic_params)
 
      if @topic.save
-        @topic.labels = Label.update_labels(params[:topic][:labels])
-        flash[:notice] = "Topic was updated."
-       redirect_to @topic
+       @topic.comments = Comment.update_comments(params[:topic][:comments])
+       redirect_to @topic, notice: "Comment was saved successfully."
      else
-       flash.now[:alert] = "Error saving topic. Please try again."
-       render :edit
+       flash.now[:alert] = "Error creating comment. Please try again."
+       render :new
+     end
      end
    end
 
@@ -71,5 +71,3 @@ class TopicsController < ApplicationController
        redirect_to topics_path
      end
    end
-
-end

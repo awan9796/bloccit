@@ -13,6 +13,12 @@
 </div>
 <br />
 
+<p class="lead">
+   <%= render partial: "comments/list", locals: { comments: @topic.comments } %>
+   <br />
+   <%= @topic.description %>
+ </p>
+
 <div class="row">
   <div class="col-md-8">
     <p><%= @post.body %></p>
