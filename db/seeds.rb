@@ -20,7 +20,7 @@ posts = Post.all
 end
 
 puts "#{Post.count}"
-Post.find_or_create_by(title: "Ozzie", body: "Ozzie is a big brown Rhodesian Ridgeback")
+Post.find_or_create_by(title: "Ozzie-REV", body: "Ozzie is a big brown Rhodesian Ridgeback-REV")
 puts "#{Post.count}"
 
 
