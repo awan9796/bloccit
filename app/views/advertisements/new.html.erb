@@ -1,26 +1,33 @@
-<h1>Input New Ad Here</h1>
+<h1>Fill out this form to advertise with Bloccit</h1>
 
 <div class="row">
-  <%= form_for @advertisement do |f| %>
-
-  <div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control', placeholder: "Enter Ad Title Here" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :copy %>
-    <%= f.text_area :copy, rows: 8, class: 'form-control', placeholder: "Enter Ad Details Here" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :price %>
-    <%= f.number_field :price, class: 'form-control', placeholder: "$199" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.submit "Save" class: 'btn btn-success' %>
-  </div>
-
-  <% end %>
+  <div class="col-md-4"
+  <p>Guidelines for ads</p>
+  <ul>
+    <li>Advertisers must be 18 or over.</li>
+    <li>Bloccit retains the right to remove any ad it deems inappropriate.</li>
+    <li>Advertisers that don't leave their contact information will have their ads removed.</li>
+  </ul>
 </div>
+
+<div class="col-md-8">
+  <%= form_for @advertisement do |f| %>
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control', placeholder: "Enter ad title" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :price %>
+      <%= f.number_field :price, class: 'form-control', placeholder: "Enter ad price" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :copy %>
+      <%= f.text_area :copy, rows: 8, class: 'form-control', placeholder: "Enter ad details" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Save", class: 'btn btn-success' %>
+    </div>
+<% end %>

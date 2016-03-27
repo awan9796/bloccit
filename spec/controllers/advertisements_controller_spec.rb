@@ -3,20 +3,24 @@ include RandomData
 
 RSpec.describe AdvertisementsController, type: :controller do
 
+
   let (:my_ad) do
+  let(:new_advertisements) do
     Advertisement.create(
       id: 1,
       title: RandomData.random_sentence,
       copy: RandomData.random_paragraph,
-      price: 199
+      price: 25
     )
   end
+
 
   describe "GET #index" do
     it "returns http success" do
       get :index
       expect(response).to have_http_status(:success)
     end
+
 
     it "assigns [my_ad] to @advertisements" do
       get :index
@@ -26,6 +30,16 @@ RSpec.describe AdvertisementsController, type: :controller do
 
   describe "GET #show" do
     it "returns http success" do
+    it "assigns [new_advertisements] to @advertisements" do
+      get :index
+      expect(assigns(:advertisements)).to eq([new_advertisements])
+    end
+  end
+
+
+  describe "GET #show" do
+    it "returns http success" do
+      get :show, {id: new_advertisements.id}
       expect(response).to have_http_status(:success)
     end
 
@@ -55,5 +69,8 @@ RSpec.describe AdvertisementsController, type: :controller do
       expect(response).to redirect_to Advertisement.last
     end
   end
+
+
+
 
 end
