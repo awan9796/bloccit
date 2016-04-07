@@ -1,0 +1,9 @@
+<h1> Bloccit Ads </h1>
+<% @advertisements.each do |ad| %>
+  <div class="media">
+    <div class="media-body">
+      <%= link_to "$#{ad.price}: #{ad.title}", ad %>
+    </h4>
+  </div>
+</div>
+<% end %>
