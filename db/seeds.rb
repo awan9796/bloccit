@@ -22,11 +22,11 @@ end
 
 
 puts "#{Post.count}"
-Post.find_or_create_by(title: "Ozzie-REV.2", body: "Ozzie is a big brown Rhodesian Ridgeback-REV.2")
+Post.find_or_create_by(title: "Ozzie-REV", body: "Ozzie is a big brown Rhodesian Ridgeback-REV.2")
 puts "#{Post.count}"
 
 puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
 
-Comment.find_or_create_by(title: "Ozzie-REV.2", body: "Ozzie sleeps all day like a cat - REV.2")
+Comment.find_or_create_by(body: "Ozzie is a big brown Rhodesian Ridgeback-REV.2")
