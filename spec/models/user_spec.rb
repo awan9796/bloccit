@@ -62,8 +62,8 @@ RSpec.describe User, type: :model do
          expect(user.admin?).to be_falsey
        end
 
-       it "returns false for #moderator?" do
-         exper(user.moderator?).to be_falsey
+       it "returns false for a #moderator?" do
+         expect(user.moderator?).to be_falsey
        end
      end
 
@@ -77,7 +77,7 @@ RSpec.describe User, type: :model do
       end
 
       it "returns false for a #moderator?" do
-        exper(user.moderator?).to be_falsey
+        expect(user.moderator?).to be_falsey
       end
 
       it "returns true for #admin?" do
@@ -98,31 +98,13 @@ RSpec.describe User, type: :model do
         expect(user.admin?).to be_falsey
       end
 
-      it "returns true for #moderator" do
-        exper(user.moderator?).to be_truthy
+      it "returns true for #moderator?" do
+        expect(user.moderator?).to be_truthy
       end
     end
 
+    end
 
-  describe "invalid user" do
-     let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }
-     let(:user_with_invalid_email) { User.new(name: "Bloccit User", email: "") }
-     let(:user_with_invalid_email_format) { User.new(name: "Bloccit User", email: "invalid_format") }
-
-     it "should be an invalid user due to blank name" do
-       expect(user_with_invalid_name).to_not be_valid
-     end
-
-     it "should be an invalid user due to blank email" do
-       expect(user_with_invalid_email).to_not be_valid
-     end
-
-     it "should be an invalid user due to incorrectly formatted email address" do
-       expect(user_with_invalid_email_format).to_not be_valid
-     end
-
-   end
- end
 
  describe "#favourite_for(post)" do
      before do

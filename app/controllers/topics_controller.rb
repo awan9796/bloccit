@@ -30,6 +30,7 @@ class TopicsController < ApplicationController
 
    def edit
      @topic = Topic.find(params[:id])
+
    end
 
    def update
