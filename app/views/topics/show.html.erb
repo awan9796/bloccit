@@ -36,4 +36,10 @@
     <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-success' %>
     <% end %>
   </div>
+
+  <% if current_user.moderator? %>
+  <div class="col-md-4">
+    <%= link_to "Edit Post", edit_topic_post_path(@topic), class: 'btn btn-success' %>
+    <% end %>
+  </div>
 </div>
