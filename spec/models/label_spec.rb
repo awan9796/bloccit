@@ -29,7 +29,7 @@ RSpec.describe Label, type: :model do
         labels = "#{label.name}, #{label2.name}"
         labels_as_a = [label, label2]
 
-        expect(Label.update_labels(labels)).to eq(labels_as_a)
+       expect(Label.update_labels(labels)).to eq(labels_as_a)
       end
     end
 
