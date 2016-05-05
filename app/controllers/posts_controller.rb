@@ -78,6 +78,11 @@ def authorize_user
        redirect_to [post.topic, post]
      end
 
+     def authorize_moderator_user
+       unless current_user.moderator?
+         flash[:alert] = "You must be an admin to do that."
+         redirect_to topics_path
+       end
 
    end
 end
