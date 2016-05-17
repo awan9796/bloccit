@@ -4,12 +4,20 @@ Rails.application.routes.draw do
 
   resources :topics do
     resources :posts, except: [:index]
+    resources :comments, only: [:create, :destroy]#, except: [:index]
 
   end
 
-  resources :posts, only: [] do
+  resources :posts do
     resources :comments, only: [:create, :destroy]
-    resources :favourites, only: [:create, :destroy]
+  end
+
+    #resources :comments, only: [:show, :create, :destroy] do
+
+    #end
+
+
+    resources :favourites, only: [:create, :destroy] do
 
     post '/up-vote' => 'votes#up_vote', as: :up_vote
     post '/down-vote' => 'votes#down_vote', as: :down_vote
@@ -23,4 +31,4 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  end
+end

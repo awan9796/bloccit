@@ -6,7 +6,27 @@ require 'rails_helper'
   let(:my_user) { create(:user) }
   let(:other_user) { create(:user) }
   let(:my_post) { create(:post, topic: my_topic, user: my_user) }
-   let(:my_comment) { Comment.create!(body: 'Comment Body', post: my_post, user: my_user) }
+  let(:my_comment) { Comment.create!(body: 'Comment Body', user: my_user) }
+   #let(:my_comment) { Post.create!(body: 'Comment Body', user: my_user) }
+
+    #describe "GET show" do
+       #it "returns http success" do
+         #get :show, {id: my_comment.id }
+         #expect(response). to have_http_status(:success)
+       #end
+
+       #it "renders the #show view" do
+         #get :show, {id: my_comment.id }
+         #expect(response). to render_template :show
+       #end
+
+       #it "assigns my_comment to @comment" do
+         #get :show, {id: my_comment.id }
+         #expect(assigns(:comment)).to eq(my_comment)
+       #end
+     #end
+
+
 
  # #6
    context "guest" do
@@ -42,12 +62,12 @@ require 'rails_helper'
        end
      end
 
-     describe "DELETE destroy" do
-       it "redirects the user to the posts show view" do
-         delete :destroy, post_id: my_post.id, id: my_comment.id
-         expect(response).to redirect_to([my_topic, my_post])
-       end
-     end
+     #describe "DELETE destroy" do
+       #it "redirects the user to the posts show view" do
+         #delete :destroy, comment_id: my_comment.id
+         #expect(response).to redirect_to([my_topic, my_post])
+       #end
+     #end
    end
 
 
@@ -70,13 +90,13 @@ require 'rails_helper'
 
      describe "DELETE destroy" do
        it "deletes the comment" do
-         delete :destroy, post_id: my_post.id, id: my_comment.id
+         delete :destroy, comment_id: my_comment.id
          count = Comment.where({id: my_comment.id}).count
          expect(count).to eq 0
        end
 
        it "redirects to the post show view" do
-         delete :destroy, post_id: my_post.id, id: my_comment.id
+         delete :destroy, comment_id: my_comment.id
          expect(response).to redirect_to [my_topic, my_post]
        end
      end
@@ -102,15 +122,15 @@ require 'rails_helper'
 
      describe "DELETE destroy" do
        it "deletes the comment" do
-         delete :destroy, post_id: my_post.id, id: my_comment.id
+         delete :destroy, comment_id: my_comment.id
          count = Comment.where({id: my_comment.id}).count
          expect(count).to eq 0
        end
 
        it "redirects to the post show view" do
-         delete :destroy, post_id: my_post.id, id: my_comment.id
-         expect(response).to redirect_to [my_topic, my_post]
+         delete :destroy, comment_id: my_comment.id
+         expect(response).to redirect_to [my_comment]
        end
      end
    end
-end
+ end
