@@ -1,15 +1,16 @@
 class Post < ActiveRecord::Base
   belongs_to :topic
   belongs_to :user
-  
+
 
   has_many :commentings, as: :commentable
   has_many :comments, through: :commentings
 
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
-  has_many :votes, dependent: :destroy
-  has_many :favourites, dependent: :destroy
+
+  #has_many :votes, dependent: :destroy
+  #as_many :favourites, dependent: :destroy
 
   default_scope { order('rank DESC') }
   scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
@@ -19,22 +20,22 @@ class Post < ActiveRecord::Base
    validates :topic, presence: true
    validates :user, presence: true
 
-   def up_votes
-     votes.where(value: 1).count
-   end
+   #def up_votes
+    # votes.where(value: 1).count
+   #end
 
-   def down_votes
-     votes.where(value: -1).count
-   end
+   #def down_votes
+    # votes.where(value: -1).count
+   #end
 
-   def points
-     votes.sum(:value)
-   end
+   #def points
+    # votes.sum(:value)
+   #end
 
-   def update_rank
-    age_in_days = (created_at - Time.new(1970,1,1)) / 1.day.seconds
-    new_rank = points + age_in_days
-    update_attribute(:rank, new_rank)
-  end
+   #def update_rank
+    #age_in_days = (created_at - Time.new(1970,1,1)) / 1.day.seconds
+    #new_rank = points + age_in_days
+    #update_attribute(:rank, new_rank)
+  #end
 
 end

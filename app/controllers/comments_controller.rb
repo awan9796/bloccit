@@ -5,75 +5,83 @@ class CommentsController < ApplicationController
 
 
 
-   def create
+  def create
 
-     @post = Post.find(params[:post_id])
-     comment = @post.comments.new(comment_params)
-     comment.user = current_user
+    if params[:post_id]
 
-     if comment.save
-       flash[:notice] = "Comment saved successfully."
-       redirect_to [@post.topic, @post]
-     else
-       redirect_to [@post.topic, @post]
-        end
+      @post = Post.find(params[:post_id])
+      comment = @post.comments.new(comment_params)
+      comment.user = current_user
+
+      if comment.save
+        flash[:notice] = "Comment saved successfully."
+        redirect_to [@post.topic, @post]
+      else
+        flash[:notice] = "Could not save comment.  Please try again."
+        redirect_to [@post.topic, @post]
       end
 
-      def create
+    else
 
-        @topic = Topic.find(params[:post_id])
-        comment = @topic.comments.new(comment_params)
-        comment.user = current_user
+      @topic = Topic.find(params[:topic_id])
+      comment = @topic.comments.new(comment_params)
+      comment.user = current_user
 
-        if comment.save
-          flash[:notice] = "Comment saved successfully."
-          redirect_to [@post.topic]
-        else
-          redirect_to [@post.topic]
-        end
+      if comment.save
+        flash[:notice] = "Comment saved successfully."
+        redirect_to [@topic]
+      else
+        flash[:notice] = "Could not save comment.  Please try again."
+        redirect_to [@topic]
+      end
+    end
+  end
+
+
+  def destroy
+
+    if params[:post_id]
+
+      @post = Post.find(params[:post_id])
+      comment = @post.comments.find(params[:id])
+      comment.user = current_user
+
+      if comment.destroy
+        flash[:notice] = "Comment was deleted."
+        redirect_to [@post.topic, @post]
+      else
+        flash[:alert] = "Comment couldn't be deleted. Try again."
+        redirect_to [@post.topic, @post]
       end
 
+    else
 
-      def destroy
-        @post = Post.find(params[:post_id])
-        comment = @post.find(params[:id])
-        comment.user = current_user
+      @topic = Topic.find(params[:topic_id])
+      comment = @topic.comments.find(params[:id])
+      comment.user = current_user
 
-        if comment.destroy
-          flash[:notice] = "Comment was deleted."
-          redirect_to [@post.topic, @post]
-        else
-          flash[:alert] = "Comment couldn't be deleted. Try again."
-          redirect_to [@post.topic, @post]
-        end
+      if comment.destroy
+        flash[:notice] = "Comment was deleted."
+        redirect_to [@topic]
+      else
+        flash[:notice] = "Comment couldn't be deleted. Try again."
+        redirect_to [@topic]
       end
+    end
+  end
 
-    def destroy
-      @comment = topic.find(params[:post_id])
-      comment = @ctopic.find(params[:id])
-      comment.user - current_user
+  private
 
-     if comment.destroy
-       flash[:notice] = "Comment was deleted."
-       redirect_to [@post.topic, @post]
-     else
-       flash[:alert] = "Comment couldn't be deleted. Try again."
-       redirect_to [@post.topic, @post]
-     end
-   end
+  def comment_params
+    params.require(:comment).permit(:body)
+  end
 
-   private
+  def authorize_user
+    comment = Comment.find(params[:id])
+    unless current_user == comment.user || current_user.admin?
+      flash[:alert] = "You do not have permission to delete a comment."
+      redirect_to [@topic]
+    end
+  end
 
-   def comment_params
-     params.require(:comment).permit(:body)
-   end
-
-   def authorize_user
-     comment = Comment.find(params[:id])
-     unless current_user == comment.user || current_user.admin?
-       flash[:alert] = "You do not have permission to delete a comment."
-       redirect_to [@comment.topic, @comment.post]
-     end
-   end
-
- end
+end
