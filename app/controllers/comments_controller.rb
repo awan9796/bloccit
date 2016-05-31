@@ -10,8 +10,10 @@ class CommentsController < ApplicationController
     if params[:post_id]
 
       @post = Post.find(params[:post_id])
-      comment = @post.comments.new(comment_params)
+      comment = Comment.new(comment_params)
       comment.user = current_user
+      @post.comments << comment
+
 
       if comment.save
         flash[:notice] = "Comment saved successfully."
@@ -24,8 +26,10 @@ class CommentsController < ApplicationController
     else
 
       @topic = Topic.find(params[:topic_id])
-      comment = @topic.comments.new(comment_params)
+      comment = Comment.new(comment_params)
       comment.user = current_user
+      @topic.comments << comment
+
 
       if comment.save
         flash[:notice] = "Comment saved successfully."
