@@ -51,7 +51,7 @@ end
 
 admin = User.create!(
    name:     'Admin User',
-   email:    'admin@example.com',
+   email:    'admin.1@example.com',
    password: 'helloworld',
    role:     'admin'
  )
@@ -59,8 +59,14 @@ admin = User.create!(
 
  member = User.create!(
    name:     'Member User',
-   email:    'member@example.com',
+   email:    'member.1@example.com',
    password: 'helloworld'
+ )
+
+ member = User.create!(
+  name:       'Moderator User',
+  email:      'moderator.1@example.com',
+  password:   'helloworld'
  )
 
 
