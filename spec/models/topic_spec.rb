@@ -14,13 +14,17 @@ RSpec.describe Topic, type: :model do
   #it { should validate_presence_of(:description)}
 
   describe "attributes" do
-    it "should respond to name" do
-    expect(topic).to respond_to(:name)
+    it "responds to name and description attributes" do
+    expect(topic).to have_attributes(name: topic.name, description: topic.description)
     end
+    
+    #it "should respond to name" do
+    ##expect(topic).to respond_to(:name)
+    #end
 
-    it "should respond to description" do
-    expect(topic).to respond_to(:description)
-    end
+    #it "should respond to description" do
+    #expect(topic).to respond_to(:description)
+    #end
 
     it "should respond to public" do
     expect(topic).to respond_to(:public)
